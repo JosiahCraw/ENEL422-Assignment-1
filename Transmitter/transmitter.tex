@@ -1,2 +1,36 @@
-\subsection{Question a)}
-answer
+\subsection{Real World Feasibility}
+
+\subsubsection{Binary Polar Signalling}
+Binary polar signaling is the most suitable for real world applications as it has the most distinct signals, only a large amount of noise can change the signal value at the
+and receiver.
+
+\subsubsection{4-PAM}
+4-PAM is still usable in the real world, especially within a wired communication system. This is because the signal can be easily affected by noise as the amplitude
+spacing between `00' and `01' is smaller than the difference between binary polar signaling, assuming that the highest and lowest amplitudes are the same for both signals.
+However, 4-PAM provided greater data rates when compared to binary polar encoding as twice the number of bit can be sent in the same bandwidth.
+
+\subsubsection{8-PAM}
+
+\subsection{Power Spectral Density of 4-PAM}
+
+With a rectangular pulse shaping the PSD of a 4-PAM signal is shown in (\ref{eqn:rn}) and (\ref{eqn:r0}).
+
+\begin{equation}
+    \label{eqn:rn}
+    R_n=\lim_{N\to\infty} \frac{1}{N} \sum_{k}a_k a_{k-n}
+\end{equation}
+
+\begin{equation}
+    \label{eqn:r0}
+    R_0 = \lim_{N\to\infty} \frac{1}{N} \sum_{k} a_k^2   
+\end{equation}
+
+\begin{equation}
+    \label{eqn:sx}
+     S_x(f) = \frac{1}{T_s}[R_0 + 2 \sum_{n=1}^{\infty}{R_n \cos 2 \pi n f T_s}]
+\end{equation}
+
+\begin{equation}
+    \label{eqn:PSD-4-PAM-rect}
+    S_y(f) = \frac{|\textrm{sinc(} T_s \textrm{)}|^2}{T_s}S_x(f)
+\end{equation}

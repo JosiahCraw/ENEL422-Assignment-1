@@ -4,3 +4,6 @@
 *.fls
 *.log
 *.gz
+*.toc
+*.auxlock
+*.md5

@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = left,
+        xlabel = $f$,
+        ylabel = {$S_y(f)$},
+    ]
+    \addplot [
+        domain=-0:500000000, 
+        samples=2000, 
+        color=red,
+    ]
+    {(abs(0.000001*(sin((x*pi*0.000002)/2)/((x*pi*0.000002)/2)))^2)*2500000)};
+    \addlegendentry{$S_y$}
+
+    \addplot [
+        color=blue,
+    ]
+    coordinates {(50000000, 0.0000000005) (50000000, 0)};
+    \addlegendentry{$B_f$}
+    
+    \end{axis}
+\end{tikzpicture}

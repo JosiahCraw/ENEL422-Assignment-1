@@ -1,28 +1,71 @@
 \subsection{Real World Feasibility}
 
 \subsubsection{Binary Polar Signalling}
-Binary polar signaling is the most suitable for real world applications as it has the most distinct signals, only a large amount of noise can change the signal value at the
-and receiver.
+Binary polar signalling is a very robust signalling method as is has a much higher noise tolerance. 
+However, it has a much lower throughput compared to other options such as 4-PAM and 8-PAM. The noise
+tolerance makes binary polar signalling suitable for wireless communications as this environment can have
+much more noise over a much further distance.
+
 
 \subsubsection{4-PAM}
-4-PAM is still usable in the real world, especially within a wired communication system. This is because the signal can be easily affected by noise as the amplitude
-spacing between `00' and `01' is smaller than the difference between binary polar signaling, assuming that the highest and lowest amplitudes are the same for both signals.
-However, 4-PAM provided greater data rates when compared to binary polar encoding as twice the number of bit can be sent in the same bandwidth.
+4-PAM is also a reasonably robust signalling method as there is still some noise tolerance as the different levels
+are reasonably well defined. This signaling method also allows double the data rate when compared to binary polar signalling.
+These properties make this method well suited to wired communication as noise is less noticeable in the signal as the medium
+can be controlled.
+
+% 4-PAM is still usable in the real world, especially within a wired communication system. This is because the signal can be easily affected by noise as the amplitude
+% spacing between `00' and `01' is smaller than the difference between binary polar signaling, assuming that the highest and lowest amplitudes are the same for both signals.
+% However, 4-PAM provided greater data rates when compared to binary polar encoding as twice the number of bit can be sent in the same bandwidth.
 
 \subsubsection{8-PAM}
+8-PAM however, has comparatively poor noise performance, which could require significant error correction with large overhead which could negate the
+improved throughput compared to other methods.
 
-\subsection{Power Spectral Density of 4-PAM}
+\subsubsection{Recommedation}
+Overall, I would recommend using 4-PAM as it has a strong balance between data through put and noise tolerance. As 8-PAM has only 50\% more
+throughput but half the separation between signals of 4-PAM. Overall the double throughput of 4-PAM to binary signalling is worth
+the decreased noise resilience.
 
-With a rectangular pulse shaping the PSD of a 4-PAM signal is shown in (\ref{eqn:rn}) and (\ref{eqn:r0}).
+\subsection{Power Spectral Density of 4-PAM (Rectangular Pulse Shaping)}
+
+With a rectangular pulse shaping the PSD of a 4-PAM signal is shown in (\ref{eqn:PSD-4-PAM-rect}) and the values for $S_x$ 
+and $R_n$ can be found in (\ref{eqn:sx}) and (\ref{eqn:r0}, \ref{eqn:rn}) respectively.
 
 \begin{equation}
     \label{eqn:rn}
     R_n=\lim_{N\to\infty} \frac{1}{N} \sum_{k}a_k a_{k-n}
 \end{equation}
 
+Assuming that the data is random:
+
+\begin{equation}
+    \label{eqn:ak-dist}
+    P_{a_k} = 
+    \begin{dcases}
+        \frac{1}{4} \quad a_k = 3 \\
+        \frac{1}{4} \quad a_k = 1 \\
+        \frac{1}{4} \quad a_k = -1 \\
+        \frac{1}{4} \quad a_k = -3
+    \end{dcases}
+    \quad \textrm{Therefore,} \quad R_n = 0
+\end{equation}
+
+As in the previous equation the probabilities are equal for all $a_k$,
 \begin{equation}
     \label{eqn:r0}
-    R_0 = \lim_{N\to\infty} \frac{1}{N} \sum_{k} a_k^2   
+    R_0 = \lim_{N\to\infty} \frac{1}{N} \sum_{k} {a_{k}}^2 \quad \textrm{With,} \quad P_{{a_{k}}^2} = 
+    \begin{dcases}
+        \frac{1}{2} \quad a_k^2 = 9 \\
+        \frac{1}{2} \quad a_k^2 = 1
+    \end{dcases}
+\end{equation}
+
+\newpage
+
+Therefore,
+\begin{equation}
+    \label{eqn:r0-value}
+    R_0 = 5
 \end{equation}
 
 \begin{equation}
@@ -30,7 +73,37 @@ With a rectangular pulse shaping the PSD of a 4-PAM signal is shown in (\ref{eqn
      S_x(f) = \frac{1}{T_s}[R_0 + 2 \sum_{n=1}^{\infty}{R_n \cos 2 \pi n f T_s}]
 \end{equation}
 
+As,
+\begin{equation}
+    \label{eqn:ts}
+    T_b = \frac{1}{R_b} \quad \textrm{Therefore with a bitrate of 1Mbps,} \quad T_b = \frac{1}{1 \times 10^6}
+\end{equation}
+
+As 4-PAM has two bits per pulse $T_s = 2 T_b$ so $T_s = 2 \mu$s Therefore,
+\begin{equation}
+    \label{eqn:sx-real}
+    S_x(f) = \frac{1}{T_s} [5 + 0] \quad \textrm{For $T_s = 2\mu$s} \quad S_x=2500000
+\end{equation}
+
+The equation for PSD is,
 \begin{equation}
     \label{eqn:PSD-4-PAM-rect}
-    S_y(f) = \frac{|\textrm{sinc(} T_s \textrm{)}|^2}{T_s}S_x(f)
+    S_y(f) = \abs{\frac{T_s}{2} \textrm{sinc} ( \frac{f \pi T_s}{2} )}^2 S_x(f)
 \end{equation}
+
+So,
+\begin{equation}
+    \label{eqn:sy-value}
+    S_y(f) = \abs{\frac{T_s}{2} \textrm{sinc}({\frac{f \pi T_s}{2}})}^2 (2500000)
+\end{equation}
+    
+This results in the following PSD,
+\begin{figure}[h]
+    \begin{center}
+        \input{Transmitter/4-PAM-PSD}
+        \caption{PSD of a 4-PAM Signal with rectangular pulse shaping}
+    \end{center}
+\end{figure}
+
+\subsection{Power Spectral Density of 4-PAM (Nyquist Pulse Shaping)}
+    

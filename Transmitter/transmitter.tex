@@ -106,4 +106,16 @@ This results in the following PSD,
 \end{figure}
 
 \subsection{Power Spectral Density of 4-PAM (Nyquist Pulse Shaping)}
+The for the design of a Niquist pulse a roll off factor of $\alpha = 1$ was used as there is adequite bandwidth
+for the signal and the high roll off causes the tail oscillations of the pulse to fade more quickly, reducing the
+chance of intersymbol interference (ISI)
+
+\begin{figure}[h]
+    \begin{center}
+        \input{Transmitter/pulse_shape.pgf}
+    \end{center}
+    \caption{A Nyquist Pulse Shaped Signal carrying the data '0010110111'}
+\end{figure}
+
+
     

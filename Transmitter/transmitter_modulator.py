@@ -23,7 +23,7 @@ if __name__ == "__main__":
     levels = 4
     oversample_factor = 8
 
-    bandwidth = 500
+    bandwidth = 500000
     tb = 1/bandwidth
     ts = tb*2
 
@@ -33,17 +33,18 @@ if __name__ == "__main__":
     encoded = comms_utils.encode.bin_to_pam(message, levels)
     
     # Defining the Niquist Pulse
-    pulse = comms_utils.pulse.Niquist(ts, alpha)
+    pulse = comms_utils.pulse.RCos(ts, alpha)
 
     # Declaring a new ak with the encoded data
     ak = comms_utils.ak.AK(data=encoded, levels=levels)
     # Generating a driac comb using the ak values with an 8x oversample
-    comb_function = comms_utils.comb.Comb(ak, ts/2, oversample_factor)
+    comb_function = comms_utils.comb.Comb(ak, ts, oversample_factor)
     # Pulse shaping the frac comb with the Niquist pulse
     signal = comb_function.pulse_shape(pulse)
 
-    # Plot the resulting symbol
+    # Plot the resulting signal
     signal.plot()
+    signal.plot_psd()
 
     # ------------------------------------------
     # This part generates the graph with guides
@@ -62,13 +63,11 @@ if __name__ == "__main__":
 
     # Plot both of the datasets
     plot_shaped = plt.plot(signal_time, signal_data, '-b')
-    plot_original = plt.plot(signal_time, original_data, '--r')
-
     plt.title("Nyquist Pulse shaped Signal")
     plt.xlabel("Time (s)")
     plt.ylabel("Amplitude")
-    
-    
+    plt.grid(True)
+    plot_original = plt.plot(signal_time, original_data, '--r')
 
     if (generating_figure == True):
         plt.savefig('pulse_shape.pgf')

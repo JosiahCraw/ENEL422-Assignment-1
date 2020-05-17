@@ -88,7 +88,7 @@ As 4-PAM has two bits per pulse $T_s = 2 T_b$ so $T_s = 2 \mu$s Therefore,
 The equation for PSD is,
 \begin{equation}
     \label{eqn:PSD-4-PAM-rect}
-    S_y(f) = \abs{\frac{T_s}{2} \textrm{sinc} ( \frac{f \pi T_s}{2} )}^2 S_x(f)
+    S_y(f) = \abs{\frac{T_s}{2} \textrm{sinc}( \frac{f \pi T_s}{2} )}^2 S_x(f)
 \end{equation}
 
 So,
@@ -110,9 +110,58 @@ The for the design of a Niquist pulse a roll off factor of $\alpha = 1$ was used
 for the signal and the high roll off causes the tail oscillations of the pulse to fade more quickly, reducing the
 chance of intersymbol interference (ISI)
 
+The $S_x$ value is the same as above, using a root raised cosine pulse shaping the pulse is:
+
+\begin{equation}
+    \label{eqn:pf-w-niquist}
+    P(f) =
+    \begin{dcases}
+        \frac{1}{4W} [1+\textrm{cos}(\frac{\pi f}{2W})] \quad \textrm{when} \quad 0<|f|<2W \\
+        0 \quad \quad \textrm{when} |f| \geq 2W
+    \end{dcases}
+\end{equation}
+
+Therefore $|P(f)|^2$ is,
+
+\begin{equation}
+    \label{eqn-pf2-nyquist}
+    |P(f)|^2 =
+    \begin{dcases}
+        \frac{1}{16W^2}[1+\textrm{cos}(\frac{\pi f}{2W})]^2 \quad \textrm{when} \quad 0<|f|<2W \\
+        0 \quad \textrm{when} \quad |f| \geq 2W
+    \end{dcases}
+\end{equation}
+
+As $2W = \frac{1}{T_s}$,
+
+\begin{equation}
+    \label{eqn-pf2-nyquist-ts}
+    |P(f)|^2 =
+    \begin{dcases}
+        \frac{T_s^2}{4}[1+\textrm{cos}(\pi f T_s)]^2 \quad \textrm{when} \quad 0<|f|<\frac{1}{T_s} \\
+        0 \quad \textrm{when} \quad |f| \geq \frac{1}{T_s}
+    \end{dcases}
+\end{equation}
+
+Therefore the power spectral density is,
+
+\begin{equation}
+    \label{eqn:psd-nyquist}
+    S_y(f) = \frac{5T_s}{4}[1+\textrm{cos}(\pi f T_s)]^2
+\end{equation}
+
+This results in the following plot,
+
+\begin{figure}[h]
+    \begin{center}
+        \input{Transmitter/Nyquist-PSD.tex}
+        \caption{The PSD of a RRCOS pulse shaped 4-PAM Signal}
+    \end{center}
+\end{figure}
+
 \subsection{Pulse shaping a signal with a Nyquist pulse}
 
-\begin{figure}
+\begin{figure}[h]
     \begin{center}
         \input{Transmitter/pulse_shape.pgf}
     \end{center}

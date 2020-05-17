@@ -1,19 +1,29 @@
 \subsection{Matched Reciever Eye Diagram}
 
+The eye diagram of a signal comprised of 10,000 random bits is shown in Figure
+~\ref{fig:eye-no-noise}, this example has a SNR$=\infty$.
 \begin{figure}[h]
     \begin{center}
         \input{Receiver/eye.pgf}
     \end{center}
     \caption{Eye Diagram of a signal passed through a matched filter with a SNR=$\infty$}
+    \label{fig:eye-no-noise}
 \end{figure}
 
 \subsection{Eye Diagram with a SNR=10dB}
+As noise is added to the received signal the `eye' in the diagram will appear to close. 
+This is because the opening of the eye shows the separations between the signal levels
+at the ideal sampling instances but as noise is introduced the different levels become
+harder to distinguish from each other, this is shown on the eye diagram as the `eye' 
+starting to close. An eye diagram from a signal of 10,000 random bits and a SNR=10dB
+can be found in Figure~\ref{fig:eye-noise}
 
 \begin{figure}[h]
     \begin{center}
         \input{Receiver/eye_noise.pgf}
     \end{center}
     \caption{Eye Diagram of a signal passed through a matched filter with a SNR=10dB}
+    \label{fig:eye-noise}
 \end{figure}
 
 \subsection{Bit error rate perfomance}
@@ -23,4 +33,13 @@
         \input{Receiver/bit-error.pgf}
     \end{center}
     \caption{BER perfomance of 10,000 bits with an SNR from 0 to 10dB with a step of 0.01}
+    \label{fig:bit-error}
 \end{figure}
+
+\subsection{Bit and symbol errors}
+I am unlikely to be able to accurately predict the bit error rate with $E_b/N_0$ of greater
+than 10dB as the probability of the noise being large enough to cause a bit error is very
+low, this means that a huge number of message bits would have to be simulated before any
+bit errors could occur. This would cause the simulation to take far to long to complete
+the simulation. To reliably predict the bit error rate the efficiency of the simpulation would
+have to be increased or use greater computing power to simulate more data quickly.

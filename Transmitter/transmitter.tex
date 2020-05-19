@@ -23,7 +23,7 @@ can have much more noise over a much further distance.
 \subsubsection{4-PAM}
 PAM signalling has the advantage of being able to transfer more data per signal period, in the case of 4-PAM
 two data bits are transferred per symbol period. These bit are encoded in the amplitude of the pulse
-the encoding is found in Table ~\ref{table:4-pam-coding}. This encoding allows 4-PAM to have double the transmission
+the encoding is found in Table \ref{table:4-pam-coding}. This encoding allows 4-PAM to have double the transmission
 rate of binary polar signaling. This extra bandwidth allows the Nyquist pulse to use more bandwidth to reduce the intersymbol
 interference (ISI) of the system by using a Nyquist pulse with a higher roll off, reducing the impact of ISI for future bits
 if the receiver samples incorrectly. 4-PAM however, has a lower noise tolerance when compared to binary polar signalling as
@@ -67,7 +67,7 @@ with a high roll off factor. It also has higher noise tolerance when compared to
 
 \subsection{Power Spectral Density of 4-PAM (Rectangular Pulse Shaping)}
 
-The equation for the power spectral density (PSD) of a line code signal is shown in (~\ref{eqn:psd-formula}) where $|P(f)|^2$ is
+The equation for the power spectral density (PSD) of a line code signal is shown in (\ref{eqn:psd-formula}) where $|P(f)|^2$ is
 the energy spectral density of the pulse and $S_Y$ is the power spectral density of the data.
 
 \begin{equation}
@@ -75,7 +75,7 @@ the energy spectral density of the pulse and $S_Y$ is the power spectral density
     S_Y(f) = |P(f)|^2 S_X(f)
 \end{equation}
 
-$S_X$ is defined as (~\ref{eqn:sx}) where $R_n$ is the average of average power of all of the signal data levels as shown in
+$S_X$ is defined as (\ref{eqn:sx}) where $R_n$ is the average of average power of all of the signal data levels as shown in
 (~\ref{eqn:rn}).
 
 \begin{equation}
@@ -104,7 +104,7 @@ Assuming that the data is random the probability of each data level is equal.
 Therefore as $R_n$ is the average power of all data and each of the symbols is equally likely the average is
 $R_n=0$ \\
 
-As in the (~\ref{eqn:ak-dist} the probabilities are equal for all $a_k$ therefore $a_k^2$ results in two equally likely 
+As in the (\ref{eqn:ak-dist} the probabilities are equal for all $a_k$ therefore $a_k^2$ results in two equally likely 
 options as shown in (~\ref{eqn:r0}),
 \begin{equation}
     \label{eqn:r0}
@@ -157,7 +157,7 @@ So,
     S_Y(f) = \abs{T_s \textrm{sinc}(f \pi T_s)}^2 (2500000)
 \end{equation}
     
-As shown in the PSD in Figure ~\ref{fig:psd-rect} the rectangular pulse signal has frequencies present outside
+As shown in the PSD in Figure \ref{fig:psd-rect} the rectangular pulse signal has frequencies present outside
 the bandlimits, the removal of these would result in a distorted signal. This shows that this signal does not meet
 bandwidth specification.
 
@@ -169,7 +169,7 @@ bandwidth specification.
     \end{center}
 \end{figure}
 
-The simulated PSD of a RCOS pulse is shown in Figure ~\ref{fig:sim-psd}.
+The simulated PSD of a RCOS pulse is shown in Figure \ref{fig:sim-psd}.
 
 \begin{figure}[H]
     \begin{center}
@@ -224,10 +224,10 @@ Therefore the power spectral density is,
     S_y(f) = \frac{5T_s}{4}[1+\textrm{cos}(\pi f T_s)]^2
 \end{equation}
 
-As shown is the PSD in Figure ~\ref{fig:fig-nyquist} there is no signal energy outside of the band limits
+As shown is the PSD in Figure \ref{fig:fig-nyquist} there is no signal energy outside of the band limits
 given in the specifications, this means that the signal will not be distorted when bandlimited. This shows
 that using a root raised cosine pulse shape for a bandlimited channel will have better performance than
-the rectangular pulse shaping in Figure ~\ref{fig:psd-rect}
+the rectangular pulse shaping in Figure \ref{fig:psd-rect}
 
 \begin{figure}[h]
     \begin{center}

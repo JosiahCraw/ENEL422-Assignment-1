@@ -14,7 +14,7 @@ The definition of autocorrelation coefficients:
     R_y[m] \triangleq E[y[i+m]y^*[i]]
 \end{equation}
 
-(~\ref{eqn:expl-0}) Is a substitution of (~\ref{eqn:y-time}) into (~\ref{eqn:auto-coeff}) with the conjugate of y[i] and
+(\ref{eqn:expl-0}) Is a substitution of (\ref{eqn:y-time}) into (\ref{eqn:auto-coeff}) with the conjugate of y[i] and
 $i$ substituted with $i+m$
 
 \begin{equation}
@@ -22,7 +22,7 @@ $i$ substituted with $i+m$
     R_y[m] = E[(\sum_{k}a_kh[i+m-k]+w[i+m])(\sum_j a_j^* h_j^*[i-j]+w[i])]
 \end{equation}
 
-(~\ref{eqn:expl-1}) this step shows that two dependant orthogonal vectors are zero at all time except where the vector index is equal.
+(\ref{eqn:expl-1}) this step shows that two dependant orthogonal vectors are zero at all time except where the vector index is equal.
 
 \begin{equation}
     \label{eqn:expl-1}
@@ -33,7 +33,7 @@ $i$ substituted with $i+m$
     \end{dcases}
 \end{equation}
 
-(~\ref{eqn:expl-2}) also shows the principal of orthogonality where the expected value of the conjugate of the noise and $a_k$ is
+(\ref{eqn:expl-2}) also shows the principal of orthogonality where the expected value of the conjugate of the noise and $a_k$ is
 zero a all points.
 
 \begin{equation}
@@ -41,7 +41,7 @@ zero a all points.
     E[a_k w^*[j]] = 0
 \end{equation}
 
-(~\ref{eqn:expl-3}) this step shows that two dependant orthogonal vectors are zero at all time except where the vector index is equal.
+(\ref{eqn:expl-3}) this step shows that two dependant orthogonal vectors are zero at all time except where the vector index is equal.
 
 \begin{equation}
     \label{eqn:expl-3}
@@ -52,7 +52,7 @@ zero a all points.
     \end{dcases}
 \end{equation}
 
-(~\ref{eqn:expl-4}) Is a simple substitution of the previous equations
+(\ref{eqn:expl-4}) Is a simple substitution of the previous equations where $E_a$is from (\ref{eqn:expl-2})
 
 \begin{equation}
     \label{eqn:expl-4}
@@ -61,7 +61,7 @@ zero a all points.
 
 Hence,
 
-(~\ref{eqn:expl-5}) simply sets $j=i-k$ to simplify the expression
+(\ref{eqn:expl-5}) simply sets $j=i-k$ to simplify the expression
 \begin{equation}
     \label{eqn:expl-5}
     R_y[m] = E_a \sum_j h[m+j]h^*[j] + \frac{N_0}{2} \delta [m]
@@ -69,12 +69,12 @@ Hence,
 
 \subsection{MMSE Equaliser}
 
-Figure ~\ref{fig:equ-eye} shows the eye diagram of a signal after matched filtering but before equalisation. After equalisation
+Figure \ref{fig:equ-eye} shows the eye diagram of a signal after matched filtering but before equalisation. After equalisation
 the eye diagram would appear to open due to the signal correction in equalisation. This corresponds with the reduction in the
 symbol error probability as the eye diagram shows the distance between different amplitude levels. When there is not distinct levels
 shown on the eye diagram this shows that accuratly dectecting the symbol is no longer possible. This is also shown on the scatter plots 
-where the values at the sampling instant are shown. The data shown in Figure ~\ref{fig:equ-scatter} (b) also shows the seperation
-between the symbol levels, indicationg that an accurate distinction could be made, compared to Figure ~\ref{fig:equ-scatter} (a)
+where the values at the sampling instant are shown. The data shown in Figure \ref{fig:equ-scatter} (b) also shows the seperation
+between the symbol levels, indicationg that an accurate distinction could be made, compared to Figure \ref{fig:equ-scatter} (a)
 where no accurate distinction can be made between the levels.
 
 \begin{figure}[H]

@@ -22,8 +22,8 @@ $i$ substituted with $i+m$
     R_y[m] = E[(\sum_{k}a_kh[i+m-k]+w[i+m])(\sum_j a_j^* h_j^*[i-j]+w[i])]
 \end{equation}
 
-(\ref{eqn:expl-1}) this step shows that expected value of a vector multiplied by it's conjugate
-are zero at all time except where the vector index is equal.
+(\ref{eqn:expl-1}) this step shows that expected value of a vector multiplied by a conjugate is zero except when multiplied
+by it's own conjugate.
 
 \begin{equation}
     \label{eqn:expl-1}
@@ -34,17 +34,17 @@ are zero at all time except where the vector index is equal.
     \end{dcases}
 \end{equation}
 
-(\ref{eqn:expl-2}) also shows the principal of orthogonality where the expected value of the conjugate of the noise and $a_k$ is
-zero a all points. This is because they are both independent vectors as the noise is AWGN the two
-vectors are statistically independent.
+(\ref{eqn:expl-2}) Shows the principal of orthogonality where the expected value of the conjugate of the noise and $a_k$ is
+zero a all points. This is due to the statistical independance of the two signals as AWGN is always statistically independent from all other
+signals.
 
 \begin{equation}
     \label{eqn:expl-2}
     E[a_k w^*[j]] = 0
 \end{equation}
 
-(\ref{eqn:expl-3}) this step shows that a vector multiplied by it's conjugate is zero for all time
-except where the vector index are equal.
+(\ref{eqn:expl-3}) this step shows that a vector multiplied by it's conjugate is zero except where multiplied by it's own
+conjugate.
 
 \begin{equation}
     \label{eqn:expl-3}
@@ -55,16 +55,20 @@ except where the vector index are equal.
     \end{dcases}
 \end{equation}
 
-(\ref{eqn:expl-4}) Is a simple substitution of the previous equations where $E_a$is from (\ref{eqn:expl-2})
+(\ref{eqn:expl-4}) Is a simple substitution of the previous equations where $E_a$is from (\ref{eqn:expl-2}) The delta function is formed 
+through (\ref{eqn:expl-3}), limiting the function to $\omega^2$ at 0 and 0 for all other values thus resulting in
+$E[w[j]w^*[k]] = \frac{N_0}{2} \delta[m]$
 
 \begin{equation}
     \label{eqn:expl-4}
     \therefore R_y[m] = \sum_k E_a h[i+m-k]h^*[i-k]+ \frac{N_0}{2}\delta [m]
 \end{equation}
 
+(\ref{eqn:expl-5}) simply sets $j=i-k$ to simplify the expression and sum over all j as well as using the linear properties of
+the expected value to move $E_a$ out to the front of the sum as $E[aX] = aE[X]$\\
+
 Hence,
 
-(\ref{eqn:expl-5}) simply sets $j=i-k$ to simplify the expression
 \begin{equation}
     \label{eqn:expl-5}
     R_y[m] = E_a \sum_j h[m+j]h^*[j] + \frac{N_0}{2} \delta [m]

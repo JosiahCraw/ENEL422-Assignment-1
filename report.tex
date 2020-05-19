@@ -11,6 +11,14 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{pgf}
+
+\def\blankpage{%
+      \clearpage%
+      \thispagestyle{empty}%
+      \addtocounter{page}{-1}%
+      \null%
+      \clearpage}
+
 \usetikzlibrary{math}
 
 \pgfplotsset{width=10cm,compat=1.9}
@@ -94,7 +102,7 @@
 \end{center}
 
 \newpage
-\newpage
+\blankpage
 
 \maketitle
 

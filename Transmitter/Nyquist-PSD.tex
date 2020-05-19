@@ -1,15 +1,36 @@
-\begin{tikzpicture}
+\begin{tikzpicture}[
+    evaluate={
+        function limitfunc(\n) {
+            if \n <= 3000000 && \n >= -3000000 then {
+                return 1;
+            } else {
+                return 0;
+            };
+        };
+    },
+]
     \begin{axis}[
         axis lines = left,
         xlabel = $f$,
         ylabel = {$S_y$},
+        title = PSD of a Nyquist RRCos pulse shaped signal
     ]
-    \addplot [
-        domain=-25000000:25000000,
+    \addplot[
+        domain=-7500000:7500000,
         samples=2000,
         color=red,
     ]
-    {(5*0.000002)/4*(1 + cos(pi*x*0.000002))^2};
+    {limitfunc(x)*((5*0.000002)/4*(1 + cos(pi*x*0.00002))^2)};
     \addlegendentry{$S_y$}
+
+    \addplot [
+        color=blue,
+    ]
+    coordinates {(5000000, 0.00001) (5000000, 0)};
+    \addplot [
+        color=blue,
+    ]
+    coordinates {(-5000000, 0.00001) (-5000000, 0)};
+    \addlegendentry{$B_w$}
     \end{axis}
 \end{tikzpicture}

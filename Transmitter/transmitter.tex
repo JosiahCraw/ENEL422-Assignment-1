@@ -1,42 +1,94 @@
-\subsection{Real World Feasibility}
+\subsection{Real World Implementation}
+
+To meet the specifications the system must have a data rate of 1Mbps and a bandwidth of no greater then
+500kHz. This results in a bit period ($T_s$) of $1\mu$s as Nyquist pulse shaping is used the Nyquist
+bandwidth of $B_w / 2 = 500\textrm{kHz}$. Using Nyquist pulse shaping allows data transfer over a
+bandwidth limited channel such as the one given in the specifications. For real world use the ideal
+Nyquist pulse cannot be used as it is not physically realisable due to the infinite frequencies 
+contained within the sinc pulse produced in the frequency domain. This can be solved by not using
+an ideal Nyquist pulse such as a root raised cosine or a raised cosine as these have the same characteristics
+as the Nyquist pulse where they are zeros at all time periods other than at `0', this eliminates noise
+when sampling at the ideal sampling instant.
 
 \subsubsection{Binary Polar Signalling}
-Binary polar signalling is a very robust signalling method as is has a much higher noise tolerance. 
-However, it has a much lower throughput compared to other options such as 4-PAM and 8-PAM. The noise
-tolerance makes binary polar signalling suitable for wireless communications as this environment can have
-much more noise over a much further distance.
+Binary polar signalling is a very robust signalling method as is has a high noise tolerance. This is
+due to the large distance between the values for `1' and `0' this is advantageous when transmitting
+over a noisy medium as the signal is less likely to have bit errors when it is received.
+However, it has a much lower throughput compared to other options such as 4-PAM and 8-PAM. This transmission type also
+will introduce distortion due to the bandwidth limitations of the channel as there will be tail frequencies that are
+removed. The noise tolerance makes binary polar signalling suitable for wireless communications as this environment 
+can have much more noise over a much further distance.
 
 
 \subsubsection{4-PAM}
-4-PAM is also a reasonably robust signalling method as there is still some noise tolerance as the different levels
-are reasonably well defined. This signaling method also allows double the data rate when compared to binary polar signalling.
-These properties make this method well suited to wired communication as noise is less noticeable in the signal as the medium
-can be controlled.
+PAM signalling has the advantage of being able to transfer more data per signal period, in the case of 4-PAM
+two data bits are transferred per symbol period. These bit are encoded in the amplitude of the pulse
+the encoding is found in Table ~\ref{table:4-pam-coding}. This encoding allows 4-PAM to have double the transmission
+rate of binary polar signaling. This extra bandwidth allows the Nyquist pulse to use more bandwidth to reduce the intersymbol
+interference (ISI) of the system by using a Nyquist pulse with a higher roll off, reducing the impact of ISI for future bits
+if the receiver samples incorrectly. 4-PAM however, has a lower noise tolerance when compared to binary polar signalling as
+the distance between the symbols is less as there a more values period making the signal less noise tolerant.
+
+\begin{table}[h]
+    \label{table:4-pam-coding}
+    \caption{4-PAM Encoding}
+    \begin{center}
+        \begin{tabular} { | m{1cm} || m{1cm} | }
+           \hline
+           {`00'} & {-3} \\
+           \hline
+           {`01'} & {-1} \\
+           \hline
+           {`10'} & {1} \\
+           \hline
+           {`11'} & {3} \\
+           \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+% 4-PAM is also a reasonably robust signalling method as there is still some noise tolerance as the different levels
+% are reasonably well defined. This signaling method also allows double the data rate when compared to binary polar signalling.
+% These properties make this method well suited to wired communication as noise is less noticeable in the signal as the medium
+% can be controlled.
 
 % 4-PAM is still usable in the real world, especially within a wired communication system. This is because the signal can be easily affected by noise as the amplitude
 % spacing between `00' and `01' is smaller than the difference between binary polar signaling, assuming that the highest and lowest amplitudes are the same for both signals.
 % However, 4-PAM provided greater data rates when compared to binary polar encoding as twice the number of bit can be sent in the same bandwidth.
 
 \subsubsection{8-PAM}
-8-PAM however, has comparatively poor noise performance, which could require significant error correction with large overhead which could negate the
-improved throughput compared to other methods.
+8-PAM has the same advantages as 4-PAM in regards to throughput with double the levels of 4-PAM, 8-PAM is able to transmit 3
+bits per symbol. This however, comes with worse noise tolerance than 4-PAM as the different levels are even closer together
+this causes the signal to become much less noise tolerant than either 4-PAM or binary polar signalling.
 
 \subsubsection{Recommedation}
-Overall, I would recommend using 4-PAM as it has a strong balance between data through put and noise tolerance. As 8-PAM has only 50\% more
-throughput but half the separation between signals of 4-PAM. Overall the double throughput of 4-PAM to binary signalling is worth
-the decreased noise resilience.
+Overall, 4-PAM best matches the requirements as it would have low distortion due to the excess bandwidth available to use a Nyquist pulse
+with a high roll off factor. It also has higher noise tolerance when compared to 8-PAM and as the extra spectral efficiency gained through
+8-PAM is not required by the specifications 4-PAM is the most suitable choice.
 
 \subsection{Power Spectral Density of 4-PAM (Rectangular Pulse Shaping)}
 
-With a rectangular pulse shaping the PSD of a 4-PAM signal is shown in () and the values for $S_x$ 
-and $R_n$ can be found in x and x, x respectively.
+The equation for the power spectral density (PSD) of a line code signal is shown in (~\ref{eqn:psd-formula}) where $|P(f)|^2$ is
+the energy spectral density of the pulse and $S_Y$ is the power spectral density of the data.
+
+\begin{equation}
+    \label{eqn:psd-formula}
+    S_Y(f) = |P(f)|^2 S_X(f)
+\end{equation}
+
+$S_X$ is defined as (~\ref{eqn:sx}) where $R_n$ is the average of average power of all of the signal data levels as shown in
+(~\ref{eqn:rn}).
+
+\begin{equation}
+    \label{eqn:sx}
+    S_X = \frac{1}{T_s}[R_0 + 2 \sum_{n=1}^{\infty}{R_n \cos 2 \pi n f T_s}]
+\end{equation}
 
 \begin{equation}
     \label{eqn:rn}
     R_n=\lim_{N\to\infty} \frac{1}{N} \sum_{k}a_k a_{k-n}
 \end{equation}
 
-Assuming that the data is random:
+Assuming that the data is random the probability of each data level is equal.
 
 \begin{equation}
     \label{eqn:ak-dist}
@@ -47,10 +99,13 @@ Assuming that the data is random:
         \frac{1}{4} \quad a_k = -1 \\
         \frac{1}{4} \quad a_k = -3
     \end{dcases}
-    \quad \textrm{Therefore,} \quad R_n = 0
 \end{equation}
 
-As in the previous equation the probabilities are equal for all $a_k$,
+Therefore as $R_n$ is the average power of all data and each of the symbols is equally likely the average is
+$R_n=0$ \\
+
+As in the (~\ref{eqn:ak-dist} the probabilities are equal for all $a_k$ therefore $a_k^2$ results in two equally likely 
+options as shown in (~\ref{eqn:r0}),
 \begin{equation}
     \label{eqn:r0}
     R_0 = \lim_{N\to\infty} \frac{1}{N} \sum_{k} {a_{k}}^2 \quad \textrm{With,} \quad P_{{a_{k}}^2} = 
@@ -60,20 +115,13 @@ As in the previous equation the probabilities are equal for all $a_k$,
     \end{dcases}
 \end{equation}
 
-\newpage
-
-Therefore,
+Therefore as $a_k^2=9 \quad \textrm{or} \quad a_k^2=1 $ the average comes to,
 \begin{equation}
     \label{eqn:r0-value}
     R_0 = 5
 \end{equation}
 
-\begin{equation}
-    \label{eqn:sx}
-     S_x(f) = \frac{1}{T_s}[R_0 + 2 \sum_{n=1}^{\infty}{R_n \cos 2 \pi n f T_s}]
-\end{equation}
-
-As,
+The required bit period can be derived from the required data rate.
 \begin{equation}
     \label{eqn:ts}
     T_b = \frac{1}{R_b} \quad \textrm{Therefore with a bitrate of 1Mbps,} \quad T_b = \frac{1}{1 \times 10^6}
@@ -82,31 +130,47 @@ As,
 As 4-PAM has two bits per pulse $T_s = 2 T_b$ so $T_s = 2 \mu$s Therefore,
 \begin{equation}
     \label{eqn:sx-real}
-    S_x(f) = \frac{1}{T_s} [5 + 0] \quad \textrm{For $T_s = 2\mu$s} \quad S_x=2500000
+    S_X(f) = \frac{1}{T_s} [5 + 0] \quad \textrm{For $T_s = 2\mu$s} \quad S_x=2500000
+\end{equation}
+\\
+The rectangular pulse is defined as,
+
+\begin{equation}
+    \label{eqn:pt}
+    p(t) = \textrm{rect}(\frac{t}{T_s})
+\end{equation}
+
+\begin{equation}
+    \label{eqn:pf}
+    P(f) = T_s \textrm{sinc}(\pi f T_s)
 \end{equation}
 
 The equation for PSD is,
 \begin{equation}
     \label{eqn:PSD-4-PAM-rect}
-    S_y(f) = \abs{\frac{T_s}{2} \textrm{sinc}( \frac{f \pi T_s}{2} )}^2 S_x(f)
+    S_Y(f) = \abs{T_s \textrm{sinc}(f \pi T_s)}^2 S_x(f)
 \end{equation}
 
 So,
 \begin{equation}
     \label{eqn:sy-value}
-    S_y(f) = \abs{\frac{T_s}{2} \textrm{sinc}({\frac{f \pi T_s}{2}})}^2 (2500000)
+    S_Y(f) = \abs{T_s \textrm{sinc}(f \pi T_s)}^2 (2500000)
 \end{equation}
     
-This results in the following PSD,
+As shown in the PSD in Figure ~\ref{fig:psd-rect} the rectangular pulse signal has frequencies present outside
+the bandlimits, the removal of these would result in a distorted signal. This shows that this signal does not meet
+bandwidth specification.
+
 \begin{figure}[h]
     \begin{center}
         \input{Transmitter/4-PAM-PSD}
+        \label{fig:psd-rect}
         \caption{PSD of a 4-PAM Signal with rectangular pulse shaping}
     \end{center}
 \end{figure}
 
 \subsection{Power Spectral Density of 4-PAM (Nyquist Pulse Shaping)}
-The for the design of a Niquist pulse a roll off factor of $\alpha = 1$ was used as there is adequite bandwidth
+The for the design of a Nyquist pulse a roll off factor of $\alpha = 1$ was used as there is adequate bandwidth
 for the signal and the high roll off causes the tail oscillations of the pulse to fade more quickly, reducing the
 chance of intersymbol interference (ISI)
 
@@ -150,21 +214,29 @@ Therefore the power spectral density is,
     S_y(f) = \frac{5T_s}{4}[1+\textrm{cos}(\pi f T_s)]^2
 \end{equation}
 
-This results in the following plot,
+As shown is the PSD in Figure ~\ref{fig:fig-nyquist} there is no signal energy outside of the band limits
+given in the specifications, this means that the signal will not be distorted when bandlimited. This shows
+that using a root raised cosine pulse shape for a bandlimited channel will have better performance than
+the rectangular pulse shaping in Figure ~\ref{fig:psd-rect}
 
 \begin{figure}[h]
     \begin{center}
         \input{Transmitter/Nyquist-PSD.tex}
         \caption{The PSD of a RRCOS pulse shaped 4-PAM Signal}
+        \label{fig:psd-nyquist}
     \end{center}
 \end{figure}
 
 \subsection{Pulse shaping a signal with a Nyquist pulse}
 
-\begin{figure}[h]
+Figure ~\ref{fig:ny-pulse-shape} shows a raised cosine pulse shaped signal carrying the data `0010110111', this corresponds with the 4-PAM
+levels: [-3, 1, 3, -1, 3].
+
+\begin{figure}[H]
     \begin{center}
         \input{Transmitter/pulse_shape.pgf}
     \end{center}
+    \label{fig:ny-pulse-shape}
     \caption{A Nyquist Pulse Shaped Signal carrying the data `0010110111'}
 \end{figure}
 

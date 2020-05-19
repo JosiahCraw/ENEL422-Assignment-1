@@ -1,5 +1,5 @@
 \BOOKMARK [1][-]{section.1}{Transmitter and pulse shaping}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Real World Feasibility}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.1}{Real World Implementation}{section.1}% 2
 \BOOKMARK [3][-]{subsubsection.1.1.1}{Binary Polar Signalling}{subsection.1.1}% 3
 \BOOKMARK [3][-]{subsubsection.1.1.2}{4-PAM}{subsection.1.1}% 4
 \BOOKMARK [3][-]{subsubsection.1.1.3}{8-PAM}{subsection.1.1}% 5
@@ -10,7 +10,7 @@
 \BOOKMARK [1][-]{section.2}{Receiver}{}% 10
 \BOOKMARK [2][-]{subsection.2.1}{Matched Reciever Eye Diagram}{section.2}% 11
 \BOOKMARK [2][-]{subsection.2.2}{Eye Diagram with a SNR=10dB}{section.2}% 12
-\BOOKMARK [2][-]{subsection.2.3}{Bit error rate perfomance}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.3}{Bit error rate performance}{section.2}% 13
 \BOOKMARK [2][-]{subsection.2.4}{Bit and symbol errors}{section.2}% 14
 \BOOKMARK [1][-]{section.3}{Equaliser}{}% 15
 \BOOKMARK [2][-]{subsection.3.1}{Intersymbol Interference}{section.3}% 16

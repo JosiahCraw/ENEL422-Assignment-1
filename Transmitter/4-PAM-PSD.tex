@@ -9,17 +9,17 @@
         samples=2000, 
         color=red,
     ]
-    {5*0.000002*(sin(x*pi*0.0002)/(x*pi*0.0002))^2};
+    {2500000*(0.000001*(sin(x*pi*0.000001)/(x*pi*0.000001))^2};
     \addlegendentry{$S_y$}
 
     \addplot [
         color=blue,
     ]
-    coordinates {(500000, 0.000000003) (500000, 0)};
+    coordinates {(500000, 0.000003) (500000, 0)};
     \addplot [
         color=blue,
     ]
-    coordinates {(-500000, 0.000000003) (-500000, 0)};
+    coordinates {(-500000, 0.000003) (-500000, 0)};
     \addlegendentry{$B_w$}
     
     \end{axis}

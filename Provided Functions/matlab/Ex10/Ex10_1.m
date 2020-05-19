@@ -63,7 +63,7 @@ for i=1:10,
     Eb2N_num=10^(Eb2N(i)/10);           % Eb/N in linear scale
     Var_n=1/(2*Eb2N_num);               % 1/SNR is the noise variance
     signois=sqrt(Var_n);                % standard deviation
-    awgnois=signois*noiseq;             % AWGN
+    awgnois=signois*noiseq             % AWGN
     % Add noise to signals at the channel output
     yrcos=xrcos+awgnois;
     yrect=xrect+awgnois(1:Lrect);

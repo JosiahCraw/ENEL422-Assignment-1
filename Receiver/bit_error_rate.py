@@ -6,7 +6,7 @@ import matplotlib
 # --------------------------------------------------
 # Sets displying figure vs generating Latex pgfplot
 # --------------------------------------------------
-generating_figure = False
+generating_figure = True
 
 if (generating_figure == True):
     matplotlib.use("pgf")
@@ -20,7 +20,7 @@ if (generating_figure == True):
 
 if __name__ == "__main__":
     # Variable declaration
-    data_length = 50000 # 10000bits / 2 for symbol rate
+    data_length = 5000 # 10000bits / 2 for symbol rate
     levels = 4
     oversample_factor = 8
 
@@ -40,22 +40,15 @@ if __name__ == "__main__":
 
     # Pulse shaping the frac comb with the Niquist pulse
     signal = comb_function.pulse_shape(pulse)
+
     comb_function.delay_clock_comb(pulse, len(signal))
 
-    signal.add_noise(10)
-    
-    # Convolve the sent signal with the rrcos pulse
-    recived = signal.convolve(pulse)
-    comb_function.delay_clock_comb(pulse, len(recived))
-
-    decoded = comms_utils.decode.decode_pam(recived*comb_function.get_clock_comb(), levels)
-
     # Generate dB options
-    db_vals = [db for db in np.arange(0, 10, 1)]
+    db_vals = [db for db in np.arange(1, 11, 1)]
 
     # Plot the bit error rate to dB
     if (generating_figure == True):
-        comms_utils.plot.bit_errors(recived, comb_function, db_vals,
-            pgf_plot='bit-error.pgf')
+        comms_utils.plot.bit_errors(signal, comb_function, pulse, db_vals,
+            pgf_plot='bit-error-10000.pgf')
     else:
-        comms_utils.plot.bit_errors(recived, comb_function, db_vals)
+        comms_utils.plot.bit_errors(signal, comb_function, pulse, db_vals)

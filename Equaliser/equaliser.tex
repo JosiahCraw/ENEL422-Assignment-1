@@ -22,7 +22,8 @@ $i$ substituted with $i+m$
     R_y[m] = E[(\sum_{k}a_kh[i+m-k]+w[i+m])(\sum_j a_j^* h_j^*[i-j]+w[i])]
 \end{equation}
 
-(\ref{eqn:expl-1}) this step shows that two dependant orthogonal vectors are zero at all time except where the vector index is equal.
+(\ref{eqn:expl-1}) this step shows that expected value of a vector multiplied by it's conjugate
+are zero at all time except where the vector index is equal.
 
 \begin{equation}
     \label{eqn:expl-1}
@@ -34,14 +35,16 @@ $i$ substituted with $i+m$
 \end{equation}
 
 (\ref{eqn:expl-2}) also shows the principal of orthogonality where the expected value of the conjugate of the noise and $a_k$ is
-zero a all points.
+zero a all points. This is because they are both independent vectors as the noise is AWGN the two
+vectors are statistically independent.
 
 \begin{equation}
     \label{eqn:expl-2}
     E[a_k w^*[j]] = 0
 \end{equation}
 
-(\ref{eqn:expl-3}) this step shows that two dependant orthogonal vectors are zero at all time except where the vector index is equal.
+(\ref{eqn:expl-3}) this step shows that a vector multiplied by it's conjugate is zero for all time
+except where the vector index are equal.
 
 \begin{equation}
     \label{eqn:expl-3}

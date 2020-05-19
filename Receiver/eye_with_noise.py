@@ -27,7 +27,7 @@ if __name__ == "__main__":
     tb = 1/bandwidth
     ts = tb*2
 
-    alpha = 0.5
+    alpha = 1
 
     snr_db = 10
     

@@ -19,7 +19,7 @@ if (generating_figure == True):
 
 if __name__ == "__main__":
     # Variable declaration
-    data_length = 5000
+    data_length = 1000
     levels = 4
     oversample_factor = 8
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     tb = 1/bandwidth
     ts = tb*2
 
-    alpha = 0.5
+    alpha = 1
     
     # Defining the Root Raised Cosine Pulse
     pulse = comms_utils.pulse.RRCos(ts, alpha)

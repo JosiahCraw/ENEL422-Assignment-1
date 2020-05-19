@@ -1,14 +1,14 @@
 \subsection{Real World Implementation}
 
 To meet the specifications the system must have a data rate of 1Mbps and a bandwidth of no greater then
-500kHz. This results in a bit period ($T_s$) of $1\mu$s as Nyquist pulse shaping is used the Nyquist
-bandwidth of $B_w / 2 = 500\textrm{kHz}$. Using Nyquist pulse shaping allows data transfer over a
+500kHz. This results in a bit period ($T_s$) of $1\mu$s, As Nyquist pulse shaping is used the Nyquist
+bandwidth is $B_w / 2 = 500\textrm{kHz}$. Using Nyquist pulse shaping allows data transfer over a
 bandwidth limited channel such as the one given in the specifications. For real world use the ideal
 Nyquist pulse cannot be used as it is not physically realisable due to the infinite frequencies 
 contained within the sinc pulse produced in the frequency domain. This can be solved by not using
-an ideal Nyquist pulse such as a root raised cosine or a raised cosine as these have the same characteristics
-as the Nyquist pulse where they are zeros at all time periods other than at `0', this eliminates noise
-when sampling at the ideal sampling instant.
+an ideal Nyquist pulse such as a root raised cosine or a raised cosine pulse as these have the same characteristics
+as the Nyquist pulse where they are zeros at all time periods other than at `0', this stops a past symbol
+from adding to the current signal .
 
 \subsubsection{Binary Polar Signalling}
 Binary polar signalling is a very robust signalling method as is has a high noise tolerance. This is
@@ -166,6 +166,16 @@ bandwidth specification.
         \input{Transmitter/4-PAM-PSD}
         \label{fig:psd-rect}
         \caption{PSD of a 4-PAM Signal with rectangular pulse shaping}
+    \end{center}
+\end{figure}
+
+The simulated PSD of a RCOS pulse is shown in Figure ~\ref{fig:sim-psd}.
+
+\begin{figure}[H]
+    \begin{center}
+        \input{Transmitter/sim-psd.pgf}
+        \label{fig:sim-psd}
+        \caption{The simulated PSD of a 1000 bit long message}
     \end{center}
 \end{figure}
 
